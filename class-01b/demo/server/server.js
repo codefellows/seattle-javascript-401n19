@@ -25,6 +25,8 @@ app.get('/bad', (req, res, next) => {
   next('you messsed up')
 });
 
+// Zork is awesome
+
 app.use('*', notFoundHandler);
 app.use(errorHandler);
 
