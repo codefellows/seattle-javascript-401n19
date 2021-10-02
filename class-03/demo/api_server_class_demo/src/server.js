@@ -5,9 +5,9 @@ const express = require('express');
 const morgan = require('morgan');
 
 // Our own custom modules
-const notFoundHandler = require('./error-handlers/404.js');
-const errorHandler = require('./error-handlers/500.js');
-const peopleRoutes = require('./routes/people.js');
+const notFoundHandler = require('./handlers/404.js');
+const errorHandler = require('./handlers/500.js');
+const personRouter = require('./routes/people.js');
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Route
-app.use(peopleRoutes);
+app.use(personRouter);
 
 // Our Error Handlers -- need to be the last things defined!
 // These use the external modules we required above
