@@ -14,7 +14,7 @@ const errorHandler = require('./error_handlers/500.js');
 const clothesRoutes = require('./routes/clothes.js');
 
 // Global Middleware
-app.use(morgan('dev'));
+app.use(morgan('dev')); // This is a 3rd party logger
 app.use(express.json());
 
 // Use our routes
