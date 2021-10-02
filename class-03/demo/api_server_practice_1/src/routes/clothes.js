@@ -17,19 +17,19 @@ router.delete('/clothes/:id', deleteClothes);
 
 async function getClothes (req,res) {
     let allClothes = await Clothes.findAll();
-    res.status(200.).json(allClothes);
+    res.status(200).json(allClothes);
 }
 
 async function getOneClothes (req,res) {
     const id = parseInt(req.params.id);
     let theClothes = await Clothes.findOne({ where: { id } });
-    res.status(200.).json(theClothes);
+    res.status(200).json(theClothes);
 }
 
 async function createClothes (req,res) {
     let obj = req.body;
     let newClothes = await Clothes.create(obj)
-    res.status(200.).json(newClothes);
+    res.status(200).json(newClothes);
 }
 
 async function updateClothes (req,res) {
@@ -37,13 +37,13 @@ async function updateClothes (req,res) {
     const obj = req.body;
     let clothes = await Clothes.findOne({ where: { id } });
     let updatedClothes = await clothes.update(obj);
-    res.status(200.).json(updatedClothes);
+    res.status(200).json(updatedClothes);
 }
 
 async function deleteClothes (req,res) {
     const id = parseInt(req.params.id);
     let deletedClothes = await Clothes.destroy({ where: { id } });
-    res.status(200.).json(deletedClothes);
+    res.status(200).json(deletedClothes);
 }
 
 module.exports = router;
