@@ -5,7 +5,7 @@ const dogs = (sequelize, DataTypes) => sequelize.define('Dogs', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    hasAllLimbs: {
+    hasTail: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
     },
