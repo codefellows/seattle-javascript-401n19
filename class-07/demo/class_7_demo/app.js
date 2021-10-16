@@ -24,7 +24,7 @@ app.use(express.json());
 2. Second, I sign in with the credentials base-64 encoded. I want to verify that I recieve a token back
     ZORK
     a. req.headers.authorization = "Basic Wm9yazpCZXN0Qm9p"
-    b. token = 
+    b. token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlpvcmsiLCJpYXQiOjE2MzQ0MTU5NjR9.sMSmhGaYI9-AmFQIbPT3YC_ygt5VXGzSxOnMVgJW-w4
     LEMI
     c. req.headers.authorization = "Basic TGVtaTpTbmVha0JvaQ=="
     d. token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkxlbWkiLCJpYXQiOjE2MzQ0MTUyMDZ9.WtNrPJlDs1CQbtzlty9tfmMc_PXTjyDL8TFJQYKWIVY
