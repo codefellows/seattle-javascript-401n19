@@ -16,10 +16,6 @@ const userModel = (sequelize, DataTypes) => {
         get() {
           return jwt.sign({ username: this.username }, SECRET);
         },
-        set(tokenObj) {
-          let token = jwt.sign(tokenObj, SECRET);
-          return token;
-        }
       }
     });
   
@@ -46,7 +42,6 @@ const userModel = (sequelize, DataTypes) => {
       if (valid) { return user; }
       throw new Error('Invalid User');
     }
-  
     return users;
   }
   
