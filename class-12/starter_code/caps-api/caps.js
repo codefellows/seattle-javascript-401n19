@@ -3,6 +3,8 @@
 const io = require('socket.io-client');
 const express = require('express');
 const cors = require('cors');
+const notFound = require('./error-handlers/404.js');
+const errorHandler = require('./error-handlers/500.js');
 
 const socket = io.connect('http://localhost:3000/caps');
 
@@ -22,7 +24,6 @@ let delivery = {
 
 app.post('/pickup', (req,res) => {
     // post request from postman with a req.body
-    console.log('req body', req.body);
     if(JSON.stringify(req.body) === '{}') {
         req.body = delivery;
     }
@@ -33,5 +34,11 @@ app.post('/pickup', (req,res) => {
 
 // in-transit
 // delivered
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`server is up on port ${PORT}`));
+
+module.exports = {
+    server: app
+};

@@ -4,7 +4,7 @@
 const io = require('socket.io')(3000);
 // on connection -> console log that connection
 io.on('connection', (socket) => {
-    console.log('CORE', socket);
+    console.log('CORE', socket.id);
 });
 
 // lets create the namespace 'caps'
@@ -31,7 +31,7 @@ caps.on('connection', (socket) => {
         caps.emit('in-transit', payload);
     });
 
-//delivereed event
+//delivered event
     socket.on('delivered', (payload) => {
         logger('delivered', payload);
         caps.emit('delivered', payload);
@@ -41,4 +41,9 @@ caps.on('connection', (socket) => {
 function logger(event, payload) {
     let time = new Date();
     console.log({ time, event, payload });
+};
+
+module.exports = {
+    logIt: logger,
+    
 }
