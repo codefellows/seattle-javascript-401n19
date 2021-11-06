@@ -1,18 +1,12 @@
 'use strict';
 
-/*
-  Class 16 = Node Events (Internal Events - One App)
-  Class 17 = TCP Events (Multiple Clients - Many Apps, Computers talk to each other)
-  Class 18 = Socket.io (Multiple Clients, Many Apps, but Class 16 syntax)
-  Class 19 = Queues
-*/
-
 const Events = require('events');
 
 const events = new Events();  // Event Pool
 /*
   If we were coding this out the "functional" way, we'd need a function for every possible thing
   And in that function, we'd have to call every single body part
+
   respondToSun(level) {
     // eyelid();
     // pupil();
