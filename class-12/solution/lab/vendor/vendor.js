@@ -12,13 +12,3 @@ socket.emit('join', store);
 socket.on('delivered', (payload) => {
   console.log(`Thank you for delivering ${payload.orderID}`);
 });
-
-setInterval(() => {
-  let delivery = {
-    store: store,
-    orderID: faker.random.uuid(),
-    customer: `${faker.name.firstName()} ${faker.name.lastName()}`,
-    address: `${faker.address.city()}, ${faker.address.stateAbbr()}`
-  }
-  socket.emit('pickup', delivery);
-}, 500)
