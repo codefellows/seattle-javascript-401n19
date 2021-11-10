@@ -32,7 +32,7 @@ app.post('/pickup', (req, res) => {
     address: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
   };
 
-  socket.emit('pickup', delivery);
+  socket.emit('subscribe', { event: 'delivered', clientID: store, });
   res.status(200).send('scheduled');
 
 });
