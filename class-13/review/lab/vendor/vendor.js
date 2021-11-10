@@ -12,17 +12,18 @@ socket.emit('subscribe', { event: 'delivered', clientID: store, });
 // subscribe to in-transit event with payload
 socket.emit('subscribe', { event:'inTransit', clientID: store });
 
-// in transit listener
+// inTransit listener
 socket.on('inTransit', data => {
+  console.log(`Your package ${data.orderID} is in-transit`);
   // add a received event back to server
-  console.log('Package is in transit', data);
+  socket.emit('received', { orderID: data.orderID, event: 'inTransit', clientID: data.clientID });
 });
-// Setup listener for event, 'delivered', expecting a messageID and a payload()
-// socket.on('delivered', data => {
-//   let { messageID, payload } = data;
-//   this.socket.emit('received', { messageID, event: 'delivered', clientID: store });
-//   fn(payload);
-// });
+// Delivered Listener
+socket.on('delivered', data => {
+  console.log(`Your package ${data.orderID} has been delivered`);
+  // add a received event back to server
+  socket.emit('received', { orderID: data.orderID, event: 'delivered', clientID: data.clientID });
+});
 
 let delivery = {
   store: store,
