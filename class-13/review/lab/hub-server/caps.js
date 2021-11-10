@@ -47,6 +47,7 @@ io.on('connection', (socket) => {
     message_queue['pickup']['driver'][orderID] = delivery;
     //FIFO  queue -> add event to queue, then cycle through queue emitting events and waiting for received
     // send to driver room, driver needs to listen for 'pickup' event
+    console.log('Message_queue on a pickup event', message_queue);
     io.in('driver').emit('pickup', { clientID, orderID, payload:delivery });
   });
 
@@ -55,7 +56,10 @@ io.on('connection', (socket) => {
     // payload is orderID, clientID and delivery
     //push event to proper queue[clientID][orderID] = payload
     console.log('inTransit payload', payload);
+    if(payload.payload){
+      console.log('inTranist i have a payload.payload', payload);
     message_queue['inTransit'][payload.clientID][payload.orderID] = payload.payload;
+    };
     // emit to client room the inTransit event
     console.log('message_queue after inTransit event', message_queue);
     socket.to(payload.clientID).emit('inTransit', payload);
@@ -72,12 +76,29 @@ io.on('connection', (socket) => {
     // by event and clientID, get all orders from queue 
     // Example: message_queue['pickup']['1-206-flowers']
     // emit each event to clientID room
-
+    try {
+      let event = payload.event;
+      let clientID = payload.clientID;
+      // this is a for in which iterates over all enumerable properties of an object
+      for (const orderID in message_queue[event][clientID]) {
+        let payload = message_queue[event][clientID][orderID];
+        io.in(clientID).emit(event, { orderID, payload });
+      }
+    }
+    catch (e) { console.error(e) }
   });
 
   // received event listener
+  // When a client gets a message, they should reply back with a received event
+  // passing along the message id, event name, and client id
+  // we can then delete it from their queue
   socket.on('received', payload => {
     // on a received event w/ event, clientID, and orderID
     // find proper queue and delete that order
-  })
+    console.log('received payload', payload);
+    let {orderId, event, clientID } = payload;
+    console.log(`Received event ${event}, deleted ${orderId} from ${event} ${clientID} queue`);
+    delete message_queue[event][clientID][orderId];
+  });
+
 });

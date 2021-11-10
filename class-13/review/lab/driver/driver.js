@@ -6,16 +6,16 @@ const socket = io.connect('http://localhost:3000');
 
 //subscribe driver to pickup events with caps server
 socket.emit('subscribe', { event: 'pickup', clientID: 'driver', });
-
+socket.emit('getAll', { event: 'pickup', clientID: 'driver' })
 socket.on('pickup', data => {
   // data = {
   //   clientID: {},
   //   messageID: {},
   //   payload: {}
   // } -> data.clientID, data.orderID, data.payload
-  console.log('Driver pickup', data.orderID, data.payload);
-  // socket.emit('received', { messageID, event:'pickup', clientID: 'driver' });
+  console.log('Driver pickup', data.orderID);
   pickup(data);
+  socket.emit('received', { orderId: data.orderID, event:'pickup', clientID: 'driver' });
 });
 
 function pickup(data) {
