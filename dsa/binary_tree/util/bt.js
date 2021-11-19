@@ -64,6 +64,29 @@ class BinaryTree {
     return results;
   };
 
+  max() {
+    // check if root exists
+    // return false if no
+    // what if the first node is 0? 
+
+    let max = this.root.val; // the tmp integer variable
+
+    let _max = node => {
+      // let max = curr.val if larger
+      // if smaller, go left -> go right
+    }
+    return max;
+    //iterate recursively through your tree
+    // update a max var IF current.val is >
+    // call _max(curr.left)
+
+    // call traversal on tree, iterate through the array and grab largest
+    // could be more space efficient
+    let results = bt.preOrder;
+    // for loop through array updating max as you go
+
+  }
+
 };
 
 module.exports = BinaryTree;
