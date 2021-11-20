@@ -65,16 +65,9 @@ describe('Binary Tree Traversal', () => {
   });
 });
 
-/*
-Test preorder
-    let preOrder = tree.preOrder
-    expect preOrder to equal preRes!
-
-Test inOrder
-    let inOrder = tree.inOrder
-    expect inOrder to equal preRes!
-
-Test postOrder
-    let postOrder = tree.postOrder
-    expect postOrder to equal postRes!
-*/
+describe('Binary Tree max()', () => {
+  it('can find the max value in a tree and return that', () => {
+    let btMax = tree.max();
+    expect(btMax).toEqual(9);
+  });
+});

@@ -1,5 +1,7 @@
 'use strict';
 
+let Node = require('./node');
+
 class BinaryTree {
 
   constructor(root = null) {
@@ -65,25 +67,27 @@ class BinaryTree {
   };
 
   max() {
+    if (this.root.value == null) {
+      return;
+    }
     // check if root exists
     // return false if no
     // what if the first node is 0? 
 
-    let max = this.root.val; // the tmp integer variable
-
+    let maxVal = this.root.value; // the tmp integer variable
+    // Big O(h)
+    // Big O(n)
     let _max = node => {
+      if (node.value >= maxVal) { maxVal = node.value };
+      if (node.left) { _max(node.left) }
+      if (node.right) { _max(node.right) }
       // let max = curr.val if larger
       // if smaller, go left -> go right
     }
-    return max;
-    //iterate recursively through your tree
-    // update a max var IF current.val is >
-    // call _max(curr.left)
 
-    // call traversal on tree, iterate through the array and grab largest
-    // could be more space efficient
-    let results = bt.preOrder;
-    // for loop through array updating max as you go
+    _max(this.root);
+
+    return maxVal;
 
   }
 
