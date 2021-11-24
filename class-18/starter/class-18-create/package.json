@@ -1,0 +1,24 @@
+{
+  "name": "class-18-create",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex-white-401-advanced-javascript/class-18-create.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alex-white-401-advanced-javascript/class-18-create/issues"
+  },
+  "homepage": "https://github.com/alex-white-401-advanced-javascript/class-18-create#readme",
+  "dependencies": {
+    "dynamoose": "^2.8.2",
+    "uuid": "^8.3.2"
+  }
+}

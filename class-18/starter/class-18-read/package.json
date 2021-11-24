@@ -1,0 +1,23 @@
+{
+  "name": "class-18-read",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex-white-401-advanced-javascript/class-18-read.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alex-white-401-advanced-javascript/class-18-read/issues"
+  },
+  "homepage": "https://github.com/alex-white-401-advanced-javascript/class-18-read#readme",
+  "dependencies": {
+    "dynamoose": "^2.8.2"
+  }
+}
