@@ -84,11 +84,33 @@ class BinaryTree {
       // let max = curr.val if larger
       // if smaller, go left -> go right
     }
-
     _max(this.root);
-
     return maxVal;
+  };
 
+  bfs() {
+    //if no root node, return
+    if (!this.root) return;
+    //create input and output queues/arrays
+    let queue = [this.root];
+    let output = [];
+    //while length = true
+    while (queue.length) {
+      // let's examine the first node
+      let node = queue.shift();
+      console.log('node', node);
+      // if there is a left, push that to input for later consumption
+      if (node.left) {
+        queue.push(node.left);
+      }
+      // if there is a right, push that to input for later consumption
+      if (node.right) {
+        queue.push(node.right);
+      }
+      // else/otherwise push value to ouput
+      output.push(node.value);
+    }
+    return output;
   }
 
 };

@@ -8,7 +8,7 @@ const BT = require('../util/bt');
 //          1 -> Root
 //         / \
 //        2   3
-//       /   / \
+//       /   / \ 
 //      6   4   5
 //       \
 //        7
@@ -46,6 +46,7 @@ beforeAll(() => {
 let preRes = [1, 2, 6, 7, 8, 9, 3, 4, 5];
 let inRes = [6, 8, 7, 9, 2, 1, 4, 3, 5];
 let postRes = [8, 9, 7, 6, 2, 4, 5, 3, 1];
+let bfsRes = [1, 2, 3, 6, 4, 5, 7, 8, 9];
 
 describe('Binary Tree Traversal', () => {
 
@@ -70,4 +71,11 @@ describe('Binary Tree max()', () => {
     let btMax = tree.max();
     expect(btMax).toEqual(9);
   });
+
+  describe('Binary tree Breadth First Traversal', () => {
+    it('BFS properly traverses tree and returns result', () => {
+      let bfs = tree.bfs();
+      expect(bfs).toEqual(bfsRes);
+    })
+  })
 });
