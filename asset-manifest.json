@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/github.io/seattle-javascript-401n19/static/css/main.c01ee3ce.chunk.css",
+    "main.js": "/github.io/seattle-javascript-401n19/static/js/main.31b1b651.chunk.js",
+    "main.js.map": "/github.io/seattle-javascript-401n19/static/js/main.31b1b651.chunk.js.map",
+    "runtime-main.js": "/github.io/seattle-javascript-401n19/static/js/runtime-main.896324dc.js",
+    "runtime-main.js.map": "/github.io/seattle-javascript-401n19/static/js/runtime-main.896324dc.js.map",
+    "static/js/2.dda8bd91.chunk.js": "/github.io/seattle-javascript-401n19/static/js/2.dda8bd91.chunk.js",
+    "static/js/2.dda8bd91.chunk.js.map": "/github.io/seattle-javascript-401n19/static/js/2.dda8bd91.chunk.js.map",
+    "index.html": "/github.io/seattle-javascript-401n19/index.html",
+    "static/css/main.c01ee3ce.chunk.css.map": "/github.io/seattle-javascript-401n19/static/css/main.c01ee3ce.chunk.css.map",
+    "static/js/2.dda8bd91.chunk.js.LICENSE.txt": "/github.io/seattle-javascript-401n19/static/js/2.dda8bd91.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.896324dc.js",
+    "static/js/2.dda8bd91.chunk.js",
+    "static/css/main.c01ee3ce.chunk.css",
+    "static/js/main.31b1b651.chunk.js"
+  ]
+}
