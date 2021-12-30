@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 import './form.scss';
 
@@ -21,8 +21,9 @@ function Form(props) {
       <form onSubmit={handleSubmit}>
         <label >
           <span>URL: </span>
-          <input name='url' type='text' onChange={ (e) => setUrl(e.target.value) } />
-          <button type="submit">GO!</button>
+          <input name='url' type='text' onChange={(e) => setUrl(e.target.value)} />
+          <button data-testid="submit-form-button" type="submit">Submit</button>
+          <button data-testid="clear-form-button" type="submit">Clear</button>
         </label>
         <label className="methods">
           <span className={method === 'GET' ? 'active' : 'inactive'} id="get" onClick={() => setMethod('GET')}>GET</span>

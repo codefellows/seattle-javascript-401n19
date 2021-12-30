@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import Form from "../index";
 
 /*     STRUCTURE OF A TEST
-1. Rendera component we want to test
+1. Render a component we want to test
 2. Find elements we want to interact with
 3. Interact with said elements
 4. Assert that the results are as expected
@@ -29,7 +29,10 @@ describe("Form", () => {
   it('should be able to type into input and submit', () => {
     render(<Form handleApiCall={mockFn} />);
     const input = screen.getByRole('textbox');
-    const button = screen.getByRole('button')
+    screen.getByRole('button', {
+      name: /submit/i
+    })
+    // const button = screen.getByText(/Submit/i)
     fireEvent.change(input, { target: { value: 'https://swapi.dev/api/people/1' } });
     expect(input.value).toBe('https://swapi.dev/api/people/1');
     fireEvent.click(button);
