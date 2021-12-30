@@ -1,12 +1,13 @@
 {
   "name": "dsa",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "jest": {
-    "testPathIgnorePatterns": ["linked_list", "stacks_and_queues"]
+    "testPathIgnorePatterns": [
+      "linked_list",
+      "stacks_and_queues"
+    ]
   },
-
   "scripts": {
     "test": "jest --coverage --verbose",
     "watch": "jest --coverage --verbose --watchAll"
@@ -14,7 +15,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "jest": "^27.2.5"
-  }
+  "devDependencies": {
+    "jest": "^27.4.5"
+  },
+  "description": ""
 }
