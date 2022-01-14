@@ -65,11 +65,21 @@ class Hashmap {
     this.map[hash].add(entry);
 
   }
-  get(key) { }
+  get(key) {
+    // hash the key
+    let hash = this.hash(key)
+    // if there is nothing at the hash, return
+    if (!this.map[hash]) return;
+    // hash index.values
+    let value = this.map[hash].values().find(el => key === Object.keys(el)[0])
+    return value[key];
+  }
 }
+
 
 let myhash = new Hashmap(1024);
 myhash.set('John', 'Boss');
+myhash.set('nohJ', 'Zork');
 myhash.set('Cathy', 'The Real Boss');
 myhash.set('Zach', 'Kid 1');
 myhash.set('Allie', 'Kid 2');
@@ -88,6 +98,9 @@ myhash.set('Ovi', 'Student');
 //   console.log(i, data && data.values());
 // });
 
+let john = myhash.get('John');
+// console.log('hash-get', john)
+
 // // let string1 = 'Zork';
 // // let string2 = 'Lemi'
 // // console.log('Zork ->', asciiLator(string1))
@@ -99,4 +112,6 @@ let key = 'lemi';
 // // let size = 100;
 // // let arr = new Array(size);
 // // console.log(arr[89]);
-console.log((key.charCodeAt(0) + key.charCodeAt(1) + key.charCodeAt(2) + key.charCodeAt(3)) * 599 % 1024)
+// console.log((key.charCodeAt(0) + key.charCodeAt(1) + key.charCodeAt(2) + key.charCodeAt(3)) * 599 % 1024)
+
+module.exports = Hashmap;
