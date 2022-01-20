@@ -69,10 +69,10 @@ class Hashmap {
     // hash the key
     let hash = this.hash(key)
     // if there is nothing at the hash, return
-    if (!this.map[hash]) return;
+    if (!this.map[hash]) return false;
     // hash index.values
     let value = this.map[hash].values().find(el => key === Object.keys(el)[0])
-    return value[key];
+    return value[key]
   }
 }
 
@@ -98,7 +98,7 @@ myhash.set('Ovi', 'Student');
 //   console.log(i, data && data.values());
 // });
 
-let john = myhash.get('John');
+// let john = myhash.get('John');
 // console.log('hash-get', john)
 
 // // let string1 = 'Zork';
@@ -106,7 +106,7 @@ let john = myhash.get('John');
 // // console.log('Zork ->', asciiLator(string1))
 // // console.log('Lemi ->', asciiLator(string2))
 
-let key = 'lemi';
+// let key = 'lemi';
 // // let entry = { [key]: 2 }
 // // console.log(entry);
 // // let size = 100;
