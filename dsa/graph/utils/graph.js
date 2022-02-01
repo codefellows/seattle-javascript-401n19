@@ -1,5 +1,5 @@
 'use strict';
-
+const util = require('util');
 
 // *********** INSTRUCTIONS ************* //
 /*
@@ -61,45 +61,46 @@ class Graph {
     // - Arguments: value
     // - Returns: The added node
     let vertex = new Vertex(value)
+    console.log('Adding new Vertex with value: ', value);
     // - Add a node to the graph
     this.adjacencyList.set(vertex, []);
+    return vertex;
   }
 
-  // adds a directional edge
-  addEdge(node1, node2) {
-    // - Arguments: 2 nodes to be connected by the edge, weight (optional)
-    // - Returns: nothing
-    // - Adds a new edge between two nodes in the graph
-    // - If specified, assign a weight to the edge
-    // - Both nodes should already be in the Graph
+  addDirectedEdge(startVertex, endVertex, weight = 0) {
+    // console.log(`Creating new edge with ${startVertex} and ${endVertex}`, util.inspect(startVertex))
+    if (!this.adjacencyList.has(startVertex) || !this.adjacencyList.has(endVertex)) {
+      throw new Error('__ERROR__ Invalid Vertices');
+    }
 
-    // here is how you get a node from the adjacencyList
-    const adjancancies = this.adjacencyList.get(node1);
-    adjancancies.push(new Edge(node2, 2));
+    const adjacencies = this.adjacencyList.get(startVertex);
+    adjacencies.push(new Edge(endVertex, weight));
+  }
+
+  getNeighbors(vertex) {
+    // - Arguments: node
+    // - Returns a collection of edges connected to the given node
+    // - Include the weight of the connection in the returned collection
+    if (!this.adjacencyList.has(vertex)) {
+      throw new Error('__ERROR__ Invalid Vertex', vertex);
+    }
+
+    return [...this.adjacencyList.get(vertex)];
   }
 
   getVertices() {
     // - Arguments: none
     // - Returns all of the nodes in the graph as a collection (set, list, or similar)
-  }
-
-  getNeighbors(node) {
-    // - Arguments: node
-    // - Returns a collection of edges connected to the given node
-    // - Include the weight of the connection in the returned collection
-
+    return this.adjacencyList.entries();
   }
 
   size() {
     // - Arguments: none
     // - Returns the total number of nodes in the graph
+    return this.adjacencyList.size();
   }
 
-
-
-
   /*
-  
   ALGORITHM BreadthFirst(vertex)
   DECLARE nodes <-- new List()
   DECLARE breadth <-- new Queue()
@@ -120,32 +121,34 @@ class Graph {
   return nodes;
   */
 
-
   bfs(startNode) {
+
     const queue = [];
-    const visitedVertices = new Set();
+    const visitedNodes = new Set();
 
     queue.push(startNode);
-    visitedVertices.add(startNode);
+    visitedNodes.add(startNode);
 
     while (queue.length) {
+
       const currentNode = queue.shift();
 
       const neighbors = this.getNeighbors(currentNode);
 
       for (let neighbor of neighbors) {
+
         const neighborNode = neighbor.vertex;
 
-        if (visitedVertices.has(neighborNode)) {
+        if (visitedNodes.has(neighborNode)) {
           continue;
         } else {
-          visitedVertices.add(neighborNode)
+          visitedNodes.add(neighborNode);
         }
         queue.push(neighborNode);
       }
-
     }
-    console.log('visitedNodes', visitedNodes);
+    console.log(visitedNodes);
+
     return;
   }
 
@@ -162,3 +165,35 @@ class Graph {
 
 }
 
+const graph = new Graph();
+
+const ten = graph.addVertex(10);
+const two = graph.addVertex(2);
+const six = graph.addVertex(6);
+const seven = graph.addVertex(7);
+const three = graph.addVertex(3);
+const eight = graph.addVertex(8);
+
+
+graph.addDirectedEdge(ten, two);
+graph.addDirectedEdge(ten, six);
+graph.addDirectedEdge(ten, three);
+// graph.addDirectedEdge(ten, seven);
+graph.addDirectedEdge(two, seven);
+graph.addDirectedEdge(six, seven);
+graph.addDirectedEdge(six, eight);
+graph.addDirectedEdge(three, eight);
+graph.addDirectedEdge(eight, seven);
+
+// getNeighbors()
+let neighborCheck = graph.getNeighbors(ten);
+console.log('getNeighbors(ten) ', neighborCheck);
+
+// getVertices() -> returns and iterable object
+let vertices = graph.getVertices();
+console.log('All Graph Vertices', vertices);
+
+console.log('log the graph', util.inspect(graph))
+// console.log(util.inspect(graph.pathTo(ten, seven), false, null, true));
+// console.log('BFS Traversal with Vertex 10 as starter', util.inspect(graph.bfs(ten), false, null, true));
+// console.log(util.inspect(graph.dfs(ten), false, null, true));
