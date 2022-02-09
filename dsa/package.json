@@ -18,5 +18,8 @@
   "devDependencies": {
     "jest": "^27.4.5"
   },
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "util": "^0.12.4"
+  }
 }
