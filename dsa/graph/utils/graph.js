@@ -61,7 +61,7 @@ class Graph {
     // - Arguments: value
     // - Returns: The added node
     let vertex = new Vertex(value)
-    console.log('Adding new Vertex with value: ', value);
+    // console.log('Adding new Vertex with value: ', value);
     // - Add a node to the graph
     this.adjacencyList.set(vertex, []);
     return vertex;
@@ -75,6 +75,17 @@ class Graph {
 
     const adjacencies = this.adjacencyList.get(startVertex);
     adjacencies.push(new Edge(endVertex, weight));
+  }
+
+  addBidirectionalEdge(startVertex, endVertex, weight) {
+    if (!this.adjacencyList.has(startVertex) || !this.adjacencyList.has(endVertex)) {
+      throw new Error('__ERROR__ Invalid Vertices');
+    }
+
+    const startAdjacencies = this.adjacencyList.get(startVertex);
+    const endAdjacencies = this.adjacencyList.get(endVertex);
+    startAdjacencies.push(new Edge(endVertex, weight));
+    endAdjacencies.push(new Edge(startVertex, weight));
   }
 
   getNeighbors(vertex) {
@@ -92,6 +103,10 @@ class Graph {
     // - Arguments: none
     // - Returns all of the nodes in the graph as a collection (set, list, or similar)
     return this.adjacencyList.entries();
+  }
+
+  has(vertex) {
+    return this.adjacencyList.has(vertex);
   }
 
   size() {
@@ -124,6 +139,7 @@ class Graph {
   bfs(startNode) {
 
     const queue = [];
+    // method to keep track of visited nodes
     const visitedNodes = new Set();
 
     queue.push(startNode);
@@ -147,53 +163,88 @@ class Graph {
         queue.push(neighborNode);
       }
     }
-    console.log(visitedNodes);
+    // console.log(visitedNodes);
 
     return;
   }
 
+  /*
+    Push the starting node onto the stack
+    Start a while loop while the stack is not empty
+    Peek at the top node in the stack
+    If the top node has unvisited children, mark the top node as visited, and then Push any unvisited children back into the stack.
+    If the top node does not have any unvisited children, Pop that node off the stack
+    repeat until the stack is empty.
+  */
+
   dfs(startNode) {
-    /*
-      Push the root node into the stack
-      Start a while loop while the stack is not empty
-      Peek at the top node in the stack
-      If the top node has unvisited children, mark the top node as visited, and then Push any unvisited children back into the stack.
-      If the top node does not have any unvisited children, Pop that node off the stack
-      repeat until the stack is empty.
-    */
+
+    const stack = [];
+    const visitedNodes = new Set();
+
+    stack.push(startNode);
+    visitedNodes.add(startNode);
+
+    while (stack.length) {
+
+      const currentNode = stack.pop();
+      // console.log('CurrentNode', currentNode);
+      const neighbors = this.getNeighbors(currentNode);
+
+      for (let neighbor of neighbors) {
+        const neighborNode = neighbor.vertex;
+        // console.log('Neighbor', neighborNode);
+
+        if (visitedNodes.has(neighborNode)) {
+          continue;
+        } else {
+          visitedNodes.add(neighborNode);
+        }
+        stack.push(neighborNode);
+      }
+    }
+    // console.log('Visited Nodes', visitedNodes);
+
+    return visitedNodes
   }
 
 }
 
 const graph = new Graph();
 
-const ten = graph.addVertex(10);
-const two = graph.addVertex(2);
-const six = graph.addVertex(6);
-const seven = graph.addVertex(7);
-const three = graph.addVertex(3);
-const eight = graph.addVertex(8);
+const Pandora = graph.addVertex('Pandora');
+const Arendelle = graph.addVertex('Arendelle');
+const Metroville = graph.addVertex('Metroville');
+const Monstropolis = graph.addVertex('Monstropolis');
+const Narnia = graph.addVertex("Narnia");
+const Naboo = graph.addVertex('Naboo');
 
 
-graph.addDirectedEdge(ten, two);
-graph.addDirectedEdge(ten, six);
-graph.addDirectedEdge(ten, three);
-// graph.addDirectedEdge(ten, seven);
-graph.addDirectedEdge(two, seven);
-graph.addDirectedEdge(six, seven);
-graph.addDirectedEdge(six, eight);
-graph.addDirectedEdge(three, eight);
-graph.addDirectedEdge(eight, seven);
+graph.addBidirectionalEdge(Pandora, Metroville, 82);
+graph.addBidirectionalEdge(Pandora, Arendelle, 150);
+graph.addBidirectionalEdge(Arendelle, Metroville, 99);
+graph.addBidirectionalEdge(Arendelle, Monstropolis, 42);
+graph.addBidirectionalEdge(Monstropolis, Naboo, 73);
+graph.addBidirectionalEdge(Monstropolis, Metroville, 105);
+graph.addBidirectionalEdge(Naboo, Metroville, 26);
+graph.addBidirectionalEdge(Naboo, Narnia, 250);
+graph.addBidirectionalEdge(Narnia, Metroville, 37);
+
 
 // getNeighbors()
-let neighborCheck = graph.getNeighbors(ten);
-console.log('getNeighbors(ten) ', neighborCheck);
+let neighborCheck = graph.getNeighbors(Pandora);
+// console.log('getNeighbors(ten) ', neighborCheck);
+
 
 // getVertices() -> returns and iterable object
 let vertices = graph.getVertices();
-console.log('All Graph Vertices', vertices);
+// console.log('All Graph Vertices', vertices);
 
-console.log('log the graph', util.inspect(graph))
-// console.log(util.inspect(graph.pathTo(ten, seven), false, null, true));
-// console.log('BFS Traversal with Vertex 10 as starter', util.inspect(graph.bfs(ten), false, null, true));
-// console.log(util.inspect(graph.dfs(ten), false, null, true));
+// Breadth First Search
+let bfs = graph.bfs(Pandora);
+// console.log('BFS', bfs)
+
+// Depth First Search
+let dfs = graph.dfs(Pandora);
+console.log('DFS', dfs);
+module.exports = Graph;
